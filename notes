@@ -1,0 +1,13 @@
+uvicorn app:app --reload --host 0.0.0.0 --port 5000
+
+
+docker run --name postgresql-custom -e POSTGRES_PASSWORD=psql1234 postgres:15.2
+
+docker run --name postgresql-custom -e POSTGRES_PASSWORD=psql1234 -p 5432:5432 postgres:15.2
+
+docker run --name postgresql-custom -e POSTGRES_PASSWORD=psql1234 -p 5432:5432 -d postgres:15.2
+
+
+docker build -t ivr-outgoing:v0.2.2-prod . -f Dockerfile.aws
+
+docker attach container

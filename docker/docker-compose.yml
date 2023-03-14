@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  bootcamp-api:
+    container_name: bootcamp-api
+    build: bootcamp-api
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    ports:
+      - 5000:5000
+    volumes:
+      - ./bootcamp-api:/var/api
+
+  bootcamp-pg:
+    container_name: bootcamp-pg
+    image: mdillon/postgis
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: bootcamp-db
+      POSTGRES_USER: dbuser
+      PG_PASSWORD: dbpass
+      PGDATA: /var/pg/data
+      TZ: 'America/Lima'
+    volumes:
+      - ./local_db/bootcamp-pgdata:/var/pg/data
